@@ -9,3 +9,12 @@ tests/
 
 codex/
 AGENTS.md
+
+# 明文提示词包含不适合直接发布到 GitHub 的敏感测试文本；仓库仅提交同名 ZIP，
+# 本地保留 Markdown 源文件，修改后运行 `python3 sync-archives.py` 同步压缩包。
+/gpt-5.6-sol-unrestricted.md
+/examples/gpt-5.6-sol-unrestricted.md
+
+# 测试脚本内含敏感 prompt/判定样本；仓库仅提交每个脚本对应的同名 ZIP。
+# 不要忽略 scripts/*.zip；修改本地 Python 源文件后运行 `python3 sync-archives.py`。
+/scripts/*.py

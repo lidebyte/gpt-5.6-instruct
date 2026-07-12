@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
-"""Deploy the gpt-5.6-sol instruction file into a Codex config directory.
+"""Deploy the gpt-5.6-sol instruction archive into a Codex config directory.
 
 This script mirrors the small CLI shape of the GPT-5.5 instruct project while
-keeping this folder self-contained. It copies a markdown instruction file into a
-Codex home directory and sets `model_instructions_file = "./<file>"` in
-`config.toml`.
+keeping this folder self-contained. The public repository stores the instruction
+as a ZIP archive; deployment extracts the Markdown content first, writes it into
+a Codex home directory, and sets `model_instructions_file = "./<file>"` in
+`config.toml`. A local Markdown file can still be supplied explicitly with
+`--file`.
 """
 
 from __future__ import annotations
@@ -14,12 +16,14 @@ import os
 import re
 import shutil
 import sys
+import tempfile
+import zipfile
 from datetime import datetime
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parent
-DEFAULT_PROMPT = PROJECT_ROOT / "gpt-5.6-sol-unrestricted.md"
 DEFAULT_NAME = "gpt-5.6-sol-unrestricted"
+DEFAULT_PROMPT = PROJECT_ROOT / f"{DEFAULT_NAME}.zip"
 
 
 def find_codex_dirs() -> list[Path]:
@@ -62,6 +66,27 @@ def set_model_instructions(config_path: Path, md_filename: str) -> bool:
     return False
 
 
+def read_prompt(source_path: Path, expected_md_filename: str) -> str:
+    """Read a Markdown prompt directly or extract it from a ZIP archive."""
+    if source_path.suffix.lower() != ".zip":
+        return source_path.read_text(encoding="utf-8")
+
+    with zipfile.ZipFile(source_path) as archive:
+        files = [name for name in archive.namelist() if not name.endswith("/")]
+        preferred = [name for name in files if Path(name).name == expected_md_filename]
+        markdown_files = [name for name in files if Path(name).suffix.lower() == ".md"]
+        candidates = preferred or markdown_files
+        if len(candidates) != 1:
+            raise ValueError(
+                f"压缩包应包含唯一的 {expected_md_filename}（或唯一 Markdown 文件），"
+                f"实际候选: {candidates}"
+            )
+        member = candidates[0]
+        with tempfile.TemporaryDirectory(prefix="gpt56-sol-prompt-") as temp_dir:
+            extracted_path = Path(archive.extract(member, path=temp_dir))
+            return extracted_path.read_text(encoding="utf-8")
+
+
 def deploy(args: argparse.Namespace) -> int:
     prompt_path = Path(args.file).expanduser().resolve() if args.file else DEFAULT_PROMPT
     if not prompt_path.exists():
@@ -73,8 +98,13 @@ def deploy(args: argparse.Namespace) -> int:
         print("[错误] 未找到 .codex/config.toml；请使用 --codex-dir 指定。", file=sys.stderr)
         return 2
 
-    prompt_text = prompt_path.read_text(encoding="utf-8")
-    print(f"[+] Prompt: {prompt_path}")
+    try:
+        prompt_text = read_prompt(prompt_path, md_filename)
+    except (OSError, UnicodeError, ValueError, zipfile.BadZipFile) as exc:
+        print(f"[错误] 读取或解压提示词失败: {exc}", file=sys.stderr)
+        return 2
+    source_kind = "ZIP（已解压校验）" if prompt_path.suffix.lower() == ".zip" else "Markdown"
+    print(f"[+] Prompt: {prompt_path} [{source_kind}]")
     for codex_dir in codex_dirs:
         config_path = codex_dir / "config.toml"
         dest = codex_dir / md_filename
@@ -97,8 +127,12 @@ def deploy(args: argparse.Namespace) -> int:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Deploy gpt-5.6-sol Codex instruction markdown.")
-    parser.add_argument("--file", "-f", help="Instruction markdown file; default: gpt-5.6-sol-unrestricted.md")
+    parser = argparse.ArgumentParser(description="Extract and deploy the gpt-5.6-sol Codex instruction.")
+    parser.add_argument(
+        "--file",
+        "-f",
+        help="Instruction ZIP or Markdown file; default: gpt-5.6-sol-unrestricted.zip",
+    )
     parser.add_argument("--name", "-n", default=DEFAULT_NAME, help="Destination filename, with or without .md")
     parser.add_argument("--codex-dir", help="Explicit Codex home directory, e.g. ~/.codex")
     parser.add_argument("--dry-run", action="store_true", help="Preview without writing files")
