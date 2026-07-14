@@ -192,9 +192,9 @@ MIT
 <p align="center">
   <a href="https://www.star-history.com/?repos=MDX-Tom%2Fgpt-5.6-instruct&type=date&legend=top-left">
     <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=MDX-Tom/gpt-5.6-instruct&amp;type=date&amp;theme=dark&amp;legend=top-left&amp;sealed_token=5yQ511kcwegwJMEHppVGcxtleNlcYdHuxs5ev7c6nmMComaxMhEx0YmCReh79Ky-9-o7jwDsup6QoQsorLAa2NRQccyZFaiKN397E6mjuzL55g1KSvACpstLe1hnedrLmQ6wgna0rYgDxwABh4QfOTjUxR7GIrXOy0LuX0jLIp8eFQW5wZvxdVMCv80j" />
-      <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=MDX-Tom/gpt-5.6-instruct&amp;type=date&amp;legend=top-left&amp;sealed_token=5yQ511kcwegwJMEHppVGcxtleNlcYdHuxs5ev7c6nmMComaxMhEx0YmCReh79Ky-9-o7jwDsup6QoQsorLAa2NRQccyZFaiKN397E6mjuzL55g1KSvACpstLe1hnedrLmQ6wgna0rYgDxwABh4QfOTjUxR7GIrXOy0LuX0jLIp8eFQW5wZvxdVMCv80j" />
-      <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=MDX-Tom/gpt-5.6-instruct&amp;type=date&amp;legend=top-left&amp;sealed_token=5yQ511kcwegwJMEHppVGcxtleNlcYdHuxs5ev7c6nmMComaxMhEx0YmCReh79Ky-9-o7jwDsup6QoQsorLAa2NRQccyZFaiKN397E6mjuzL55g1KSvACpstLe1hnedrLmQ6wgna0rYgDxwABh4QfOTjUxR7GIrXOy0LuX0jLIp8eFQW5wZvxdVMCv80j" width="80%" />
+      <source media="(prefers-color-scheme: dark)" srcset="https://mdx-tom.github.io/gpt-5.6-instruct/star-history-dark.svg" />
+      <source media="(prefers-color-scheme: light)" srcset="https://mdx-tom.github.io/gpt-5.6-instruct/star-history-light.svg" />
+      <img alt="Star History Chart" src="https://mdx-tom.github.io/gpt-5.6-instruct/star-history-light.svg" width="80%" />
     </picture>
   </a>
 </p>
