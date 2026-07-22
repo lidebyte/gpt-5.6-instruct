@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="docs/images/gpt-5.6-instruct-hero.png" alt="gpt-5.6-instruct project banner" width="900" />
+<img src="docs/images/gpt-5.6-instruct-hero-optimized.png" alt="gpt-5.6-instruct project banner" width="720" />
 
 <p>
   <a href="https://github.com/MDX-Tom/gpt-5.6-instruct/stargazers"><img src="https://img.shields.io/github/stars/MDX-Tom/gpt-5.6-instruct?logo=github&label=Stars" alt="GitHub Stars" /></a>
