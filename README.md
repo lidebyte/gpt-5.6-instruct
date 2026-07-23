@@ -42,16 +42,12 @@
 ## 系统架构
 
 <p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/images/project-architecture-zh-dark.png" />
-    <source media="(prefers-color-scheme: light)" srcset="docs/images/project-architecture-zh-light.png" />
-    <img alt="自迭代提示词优化与 v41 生产使用架构" src="docs/images/project-architecture-zh-light.png" width="100%" />
-  </picture>
+  <img alt="破甲提示词持续迭代、发布门禁与生产运行架构" src="docs/images/project-architecture-zh.png" width="100%" />
 </p>
 
 项目架构由迭代优化与生产使用两部分组成。迭代阶段持续吸收用户指令、失败样例及 GitHub Issues，由模型更新中英文测试集、分析回归结果并优化提示词，经三级推理与证据门禁后发布 v41。生产阶段通过脚本加载 v41，依次完成归一化、语义分派、意图路由、状态连续性和工件验证，最终生成可核验结果。
 
-该图使用 TikZ/XeLaTeX 绘制，保留可复现的 [LaTeX 源文件](docs/architecture/project-architecture-zh-light.tex) 与 [编译 PDF](docs/architecture/project-architecture-zh-light.pdf)。
+该图使用 Draw.io 绘制，中英文页面均保存在可编辑的 [Draw.io 源文件](docs/architecture/project-architecture.drawio) 中。
 
 <a id="highlights"></a>
 
@@ -224,7 +220,7 @@ gpt-5.6-instruct/
 ├── scripts/*.zip                      # 可复现评测工具
 ├── unit-tests/test_codex_instruct.py  # 部署与回滚单元测试
 ├── .github/workflows/test-codex-instruct.yml # Python 3.8/3.13 CI
-└── docs/architecture/                 # LaTeX 架构图源文件与编译 PDF
+└── docs/architecture/                 # 可编辑的 Draw.io 架构图源文件
 ```
 
 ### 维护发布包

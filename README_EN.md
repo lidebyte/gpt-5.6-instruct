@@ -42,16 +42,12 @@ The project also provides `gpt-5.6-sol-unrestricted-v41-skills`, a jailbreak-pro
 ## System Architecture
 
 <p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/images/project-architecture-en-dark.png" />
-    <source media="(prefers-color-scheme: light)" srcset="docs/images/project-architecture-en-light.png" />
-    <img alt="Self-iterating prompt optimization and v41 production architecture" src="docs/images/project-architecture-en-light.png" width="100%" />
-  </picture>
+  <img alt="Armor-breaking prompt iteration, release gate, and production runtime architecture" src="docs/images/project-architecture-en.png" width="100%" />
 </p>
 
 The architecture consists of iterative optimization and production use. During iteration, the model absorbs user requests, failed cases, and GitHub Issues; updates the bilingual test bank; analyzes regression evidence; and revises the prompt. A candidate becomes v41 only after tiered reasoning and evidence gates. In production, the deployment script loads v41, which performs normalization, semantic dispatch, intent-family routing, state continuity, and artifact verification before the model returns a verifiable result.
 
-The diagram is drawn with TikZ/XeLaTeX; reproducible [LaTeX source](docs/architecture/project-architecture-en-light.tex) and the [compiled PDF](docs/architecture/project-architecture-en-light.pdf) are included.
+The diagram is drawn with Draw.io. Both Chinese and English pages are included in the editable [Draw.io source](docs/architecture/project-architecture.drawio).
 
 <a id="highlights"></a>
 
@@ -224,7 +220,7 @@ gpt-5.6-instruct/
 ├── scripts/*.zip                      # Reproducible evaluation tools
 ├── unit-tests/test_codex_instruct.py  # Deployment and rollback unit tests
 ├── .github/workflows/test-codex-instruct.yml # Python 3.8/3.13 CI
-└── docs/architecture/                 # LaTeX sources and compiled diagram PDFs
+└── docs/architecture/                 # Editable Draw.io architecture source
 ```
 
 ### Maintaining Release Archives
