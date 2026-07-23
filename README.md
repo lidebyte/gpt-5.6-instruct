@@ -42,12 +42,16 @@
 ## 系统架构
 
 <p align="center">
-  <img alt="破甲提示词持续迭代、发布门禁与生产运行架构" src="docs/images/project-architecture-zh.png" width="100%" />
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/images/project-architecture-zh-dark.webp" />
+    <source media="(prefers-color-scheme: light)" srcset="docs/images/project-architecture-zh-light.webp" />
+    <img alt="破甲提示词持续迭代、发布门禁与生产运行架构" src="docs/images/project-architecture-zh-light.webp" width="100%" />
+  </picture>
 </p>
 
 项目架构由迭代优化与生产使用两部分组成。迭代阶段持续吸收用户指令、失败样例及 GitHub Issues，由模型更新中英文测试集、分析回归结果并优化提示词，经三级推理与证据门禁后发布 v41。生产阶段通过脚本加载 v41，依次完成归一化、语义分派、意图路由、状态连续性和工件验证，最终生成可核验结果。
 
-该图使用 Draw.io 绘制，中英文页面均保存在可编辑的 [Draw.io 源文件](docs/architecture/project-architecture.drawio) 中。
+该图使用 Draw.io 绘制，亮色、暗色及中英文页面均保存在可编辑的 [Draw.io 源文件](docs/architecture/project-architecture.drawio) 中。
 
 <a id="highlights"></a>
 

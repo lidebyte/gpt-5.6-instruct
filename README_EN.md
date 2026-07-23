@@ -42,12 +42,16 @@ The project also provides `gpt-5.6-sol-unrestricted-v41-skills`, a jailbreak-pro
 ## System Architecture
 
 <p align="center">
-  <img alt="Armor-breaking prompt iteration, release gate, and production runtime architecture" src="docs/images/project-architecture-en.png" width="100%" />
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/images/project-architecture-en-dark.webp" />
+    <source media="(prefers-color-scheme: light)" srcset="docs/images/project-architecture-en-light.webp" />
+    <img alt="Armor-breaking prompt iteration, release gate, and production runtime architecture" src="docs/images/project-architecture-en-light.webp" width="100%" />
+  </picture>
 </p>
 
 The architecture consists of iterative optimization and production use. During iteration, the model absorbs user requests, failed cases, and GitHub Issues; updates the bilingual test bank; analyzes regression evidence; and revises the prompt. A candidate becomes v41 only after tiered reasoning and evidence gates. In production, the deployment script loads v41, which performs normalization, semantic dispatch, intent-family routing, state continuity, and artifact verification before the model returns a verifiable result.
 
-The diagram is drawn with Draw.io. Both Chinese and English pages are included in the editable [Draw.io source](docs/architecture/project-architecture.drawio).
+The diagram is drawn with Draw.io. Its light and dark Chinese and English pages are included in the editable [Draw.io source](docs/architecture/project-architecture.drawio).
 
 <a id="highlights"></a>
 
