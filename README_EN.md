@@ -202,6 +202,7 @@ gpt-5.6-instruct/
 ├── gpt-5.6-sol-unrestricted-v5.md     # Plain-text v5
 ├── gpt-5.6-sol-unrestricted-v5.zip    # v5 release archive
 ├── gpt-5.6-sol-unrestricted-v35.zip   # v35 release archive
+├── skill-examples/                    # Verbatim upstream Agent Skills
 ├── scripts/*.zip                      # Reproducible evaluation tools
 ├── unit_tests/test_codex_instruct.py  # Deployment and rollback unit tests
 ├── .github/workflows/test-codex-instruct.yml # Python 3.8/3.13 CI
@@ -216,6 +217,17 @@ Some text in `v35` and the test scripts is not rendered directly on GitHub, so t
 python3 sync-archives.py
 python3 sync-archives.py --check
 ```
+
+### Upstream Agent Skills
+
+`skill-examples/` preserves existing upstream Agent Skill directories from GitHub; these are not project-authored wrappers around reverse-engineering frameworks. Star counts are a 2026-07-21 snapshot. Imported commits, original paths, and file SHA256 values are recorded in [`skill-examples/sources.json`](skill-examples/sources.json).
+
+| Upstream skill repository | Star snapshot | Verbatim skills retained here | License |
+|---|---:|---|---|
+| [yaklang/hack-skills](https://github.com/yaklang/hack-skills) | 1,415 | [`anti-debugging-techniques`](skill-examples/yaklang-hack-skills/anti-debugging-techniques/SKILL.md), [`binary-protection-bypass`](skill-examples/yaklang-hack-skills/binary-protection-bypass/SKILL.md), [`code-obfuscation-deobfuscation`](skill-examples/yaklang-hack-skills/code-obfuscation-deobfuscation/SKILL.md), [`symbolic-execution-tools`](skill-examples/yaklang-hack-skills/symbolic-execution-tools/SKILL.md), and [`vm-and-bytecode-reverse`](skill-examples/yaklang-hack-skills/vm-and-bytecode-reverse/SKILL.md) | MIT |
+| [trailofbits/skills](https://github.com/trailofbits/skills) | 6,192 | [`dwarf-expert`](skill-examples/trailofbits-skills/dwarf-expert/SKILL.md), including its original references, agent metadata, and asset | CC-BY-SA-4.0 |
+
+All retained directories pass Codex `quick_validate.py`. A real isolated-`CODEX_HOME` runtime gate also passed: all six skill links resolved, explicit `dwarf-expert` selection produced substantive verifiable output, and no files were installed into the global skills directory. To install one, copy the selected skill directory into `${CODEX_HOME:-$HOME/.codex}/skills/` and follow the upstream license included with its source group.
 
 ## Disclaimer
 

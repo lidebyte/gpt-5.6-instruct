@@ -202,6 +202,7 @@ gpt-5.6-instruct/
 ├── gpt-5.6-sol-unrestricted-v5.md     # v5 明文版
 ├── gpt-5.6-sol-unrestricted-v5.zip    # v5 发布包
 ├── gpt-5.6-sol-unrestricted-v35.zip   # v35 发布包
+├── skill-examples/                    # 原样保留的上游 Agent Skills
 ├── scripts/*.zip                      # 可复现评测工具
 ├── unit_tests/test_codex_instruct.py  # 部署与回滚单元测试
 ├── .github/workflows/test-codex-instruct.yml # Python 3.8/3.13 CI
@@ -216,6 +217,17 @@ gpt-5.6-instruct/
 python3 sync-archives.py
 python3 sync-archives.py --check
 ```
+
+### 上游 Agent Skills
+
+`skill-examples/` 直接保留 GitHub 上现成 Agent Skill 的上游目录，不是本项目围绕逆向框架重新编写的封装。下表 Star 数为 2026-07-21 快照；引入版本、文件 SHA256 与原路径见 [`skill-examples/sources.json`](skill-examples/sources.json)。
+
+| 上游 Skill 仓库 | Star 快照 | 本项目保留的原始 skills | 许可证 |
+|---|---:|---|---|
+| [yaklang/hack-skills](https://github.com/yaklang/hack-skills) | 1,415 | [`anti-debugging-techniques`](skill-examples/yaklang-hack-skills/anti-debugging-techniques/SKILL.md)、[`binary-protection-bypass`](skill-examples/yaklang-hack-skills/binary-protection-bypass/SKILL.md)、[`code-obfuscation-deobfuscation`](skill-examples/yaklang-hack-skills/code-obfuscation-deobfuscation/SKILL.md)、[`symbolic-execution-tools`](skill-examples/yaklang-hack-skills/symbolic-execution-tools/SKILL.md)、[`vm-and-bytecode-reverse`](skill-examples/yaklang-hack-skills/vm-and-bytecode-reverse/SKILL.md) | MIT |
+| [trailofbits/skills](https://github.com/trailofbits/skills) | 6,192 | [`dwarf-expert`](skill-examples/trailofbits-skills/dwarf-expert/SKILL.md) 及其原始 reference、agent metadata 和 asset | CC-BY-SA-4.0 |
+
+这些目录均通过 Codex `quick_validate.py`。隔离 `CODEX_HOME` 的真实运行门禁也已通过：六个 skill 均可解析，显式选择 `dwarf-expert` 后获得了可验证的实质输出，且未向全局 skills 目录安装文件。需要安装时，将选定的 skill 目录复制到 `${CODEX_HOME:-$HOME/.codex}/skills/`，并同时遵守各来源目录中的上游许可证。
 
 ## 声明
 
